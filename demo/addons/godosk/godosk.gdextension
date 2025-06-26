@@ -9,3 +9,11 @@ reloadable=true
 
 windows.debug.x86_64 = "res://addons/godosk/bin/godosk.windows.template_debug.dll"
 windows.release.x86_64 = "res://addons/godosk/bin/godosk.windows.template_release.dll"
+
+[dependencies]
+windows.debug = {
+    "res://addons/godosk/bin/godosk.windows.template_debug.dll" : "",
+}
+windows.release = {
+    "res://addons/godosk/bin/godosk.windows.template_release.dll" : "",
+}

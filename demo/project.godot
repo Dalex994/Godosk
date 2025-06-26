@@ -17,7 +17,3 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="Godosk"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/test/plugin.cfg")
