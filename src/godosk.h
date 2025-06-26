@@ -1,47 +1,32 @@
 #ifndef GODOSK_H
 #define GODOSK_H
 
-#include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/ref_counted.hpp>
 #include <godot_cpp/classes/thread.hpp>
-#include <godot_cpp/classes/callable.hpp>
+#include <godot_cpp/variant/callable.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/binder_common.hpp>
-#include "vosk_api.h"
-#include "portaudio.h"
 
-namespace godot {
+using namespace godot;
 
-    class Godosk : public RefCounted {
-        GDCLASS(Godot, RefCounted);
+class Godosk : public RefCounted {
+    GDCLASS(Godosk, RefCounted);
 
-    private:
-        VoskModel *model = nullptr;
-        VoskRecognizer *recognizer = nullptr;
-        Thread *thread = nullptr;
-        bool running = false;
+private:
+    Thread thread;
+    Callable callback;
 
-        static int pa_callback(const void *input, void *output,
-                               unsigned long frameCount,
-                               const PaStreamCallbackTimeInfo* timeInfo,
-                               PaStreamCallbackFlags statusFlags,
-                               void *userData);
+public:
+    Godosk();
+    ~Godosk();
 
-        void capture_loop();
+    void _ready();
 
-    protected:
-        static void _bind_methods();
+    void run_on_thread();  // démarre le thread
+    void _thread_task();   // fonction du thread
 
-    public:
-        Godosk();
-        ~Godosk();
+protected:
+    static void _bind_methods();
+};
 
-        void init(String model_path, int sample_rate = 16000);
-        void stop();
-
-        signals:
-                void text_recognized(String result);
-                void partial_recognized(String partial);
-    };
-}
-
-#endif //GODOSK_H
+#endif // GODOSK_H

@@ -1,0 +1,11 @@
+[configuration]
+
+entry_symbol = "godosk_library_init"
+compatibility_minimum = 4.3
+reloadable=true
+
+
+[libraries]
+
+windows.debug.x86_64 = "res://addons/godosk/bin/godosk.windows.template_debug.dll"
+windows.release.x86_64 = "res://addons/godosk/bin/godosk.windows.template_release.dll"
