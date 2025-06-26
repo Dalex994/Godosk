@@ -1,8 +1,0 @@
-//
-// Created by damie on 26/06/2025.
-//
-
-#ifndef GODOSK_REGISTERTYPES_H
-#define GODOSK_REGISTERTYPES_H
-
-#endif //GODOSK_REGISTERTYPES_H
