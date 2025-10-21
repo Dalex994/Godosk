@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Test" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		This is how you link to other classes [Node], [Object].
+		[b]This is bold text[/b]
+
+		For more information, check out the [url=https://docs.godotengine.org/en/stable/tutorials/plugins/editor/custom_editor_plugin.html]Official Documentation[/url].
+
+		Youtube Channel:
+		[url=https://www.youtube.com/@realnikich]@realNikich[/url]
+
+		Support more of my projects and tutorials here!
+		[url=https://ko-fi.com/realnikich]Ko-fi[/url]
+		[url=https://patreon.com/realnikich]Patreon[/url]
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="say_hello">
+			<return type="void" />
+			<description>
+				My custom doc for the function.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="my_data" type="String" setter="set_my_data" getter="get_my_data" default="&quot;Hi guys&quot;">
+			This is my property.
+		</member>
+	</members>
+</class>
