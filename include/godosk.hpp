@@ -1,0 +1,4 @@
+#ifndef GODOSK_GODOSK_HPP
+#define GODOSK_GODOSK_HPP
+
+#endif //GODOSK_GODOSK_HPP
