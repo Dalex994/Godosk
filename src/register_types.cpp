@@ -1,7 +1,8 @@
 // Include your classes, that you want to expose to Godot
 
 
-#include "test.hpp"
+#include "../include/test.hpp"
+#include "godosk.hpp"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/class_db.hpp>
@@ -16,6 +17,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}
 	GDREGISTER_CLASS(Test)
+	GDREGISTER_CLASS(Godosk)
 	// Register your classes here, so they are available in the Godot editor and engine
 
 }

@@ -38,7 +38,7 @@ customs = [os.path.abspath(path) for path in customs]
 opts = Variables(customs, ARGUMENTS)
 opts.Add('source_dirs', 'List of source directories (comma-separated)', 'src') # Directory for source files
 opts.Add('source_exts', 'List of source file extensions (comma-separated)', '.cpp,.c,.cc,.cxx') 
-opts.Add('include_dirs', 'List of include directories (comma-separated)', 'src') # Directory for headers - some might want to create a separate include directory
+opts.Add('include_dirs', 'List of include directories (comma-separated)', 'include') # Directory for headers - some might want to create a separate include directory
 opts.Add('doc_output_dir', 'Directory for documentation output', 'gen')
 opts.Add('precision', 'Floating-point precision (single or double)', 'single')  # Default to single
 opts.Add('bundle_id_prefix', 'Bundle identifier prefix (reverse-DNS format)', 'com.gdextension')  # Default prefix
@@ -88,8 +88,16 @@ doc_output_dir = env['doc_output_dir']        # Directory for documentation outp
 precision = env.get('precision', 'single')     # Ensure precision defaults to single
 bundle_id_prefix = env.get('bundle_id_prefix', 'com.gdextension')  # Ensure prefix defaults to com.gdextension
 
+# Define libs Paths
+VOSK_LIB = r"lib/vosk"
+PORTAUDIO_LIB = r"lib/portaudio/x64/Release"
+
 # Append include directories to CPPPATH
 env.Append(CPPPATH=include_dirs)
+
+# Append external libs
+env.Append(LIBPATH=[VOSK_LIB, PORTAUDIO_LIB])
+env.Append(LIBS=['libvosk', 'portaudio_x64'])
 
 # Find all .cpp files recursively in the specified source directories
 sources = find_sources(source_dirs, source_exts)
@@ -261,6 +269,18 @@ else:
 install_dir = f"{projectdir}/{libname}/bin/{env['platform']}/"
 copy = env.Install(install_dir, source=install_source)
 
+# TODO: Instead of copying the full libs for each platform, copy the specific libs for each platform
+# VOSK_WIN_PATH = '../include/vosk/libvosk.lib'
+# PORTAUDIO_WIN_PATH = "../include/portaudio/x64/Release/portaudio_x64.lib"
+# copy_vosk = env.Install(install_dir, source=VOSK_WIN_PATH)
+# copy_portaudio = env.Install(install_dir, source=PORTAUDIO_WIN_PATH)
+
+# Copier automatiquement les DLLs de Vosk et PortAudio dans bin/windows/
+env.Command(
+    target='copy_dlls',
+    source=[],
+    action='copy lib\\vosk\\libvosk.dll bin\\windows\\ && copy lib\\portaudio\\x64\\Release\\portaudio_x64.dll bin\\windows'
+)
 # Set default targets
 default_args = [library, copy]
 Default(*default_args)
